@@ -1,12 +1,7 @@
 package main;
 
 import main.dao.*;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import main.helpers.Helpers;
 
 public class main {
 
@@ -17,12 +12,12 @@ public class main {
 		FacturaProductoDAO fact_prod = DAOFactory.getInstance().getFacturaProductoDao();
 
 
-//		cliente.insertarDesdeCSV(leerCSV("csv/clientes.csv"));
-//
-//		producto.insertarDesdeCSV(leerCSV("csv/productos.csv"));
-//
-//		factura.insertarDesdeCSV(leerCSV("csv/facturas.csv"));
-//		fact_prod.insertarDesdeCSV(leerCSV("csv/facturas-productos.csv"));
+		cliente.insertarDesdeCSV(Helpers.leerCSV("csv/clientes.csv"));
+
+		producto.insertarDesdeCSV(Helpers.leerCSV("csv/productos.csv"));
+
+		factura.insertarDesdeCSV(Helpers.leerCSV("csv/facturas.csv"));
+		fact_prod.insertarDesdeCSV(Helpers.leerCSV("csv/facturas-productos.csv"));
 
 		/* Ejercicio 3*/
 		try {
@@ -39,19 +34,5 @@ public class main {
 			e.printStackTrace();
 		}
 	}
-	
-	public static CSVParser leerCSV(String ruta) {
-		CSVParser parser = null;
-		try {
-			parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader(ruta));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return parser;
-	}
+
 }
