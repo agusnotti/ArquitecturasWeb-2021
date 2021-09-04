@@ -34,6 +34,7 @@ public class Conexion {
 			if(conn != null) {
 				if(!conn.isClosed()) {
 					conn.close();
+					
 				}
 			}
 		}

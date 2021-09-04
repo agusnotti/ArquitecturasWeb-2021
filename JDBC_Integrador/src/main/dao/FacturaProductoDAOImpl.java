@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class FacturaProductoDAOImpl extends Conexion implements AutoCloseable, FacturaProductoDAO {
+public class FacturaProductoDAOImpl extends Conexion implements FacturaProductoDAO {
 	
 	//Creacion de la tabla Factura
 	public FacturaProductoDAOImpl() {
@@ -88,11 +88,5 @@ public class FacturaProductoDAOImpl extends Conexion implements AutoCloseable, F
 		return null;
 	}
 
-	
-	//Override de metodo close por implementacion del AutoCloseable
-	@Override
-	public void close() throws Exception {
-		this.cerrarConexion();
-	}
 
 }

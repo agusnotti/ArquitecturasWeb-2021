@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteDAOImpl extends Conexion implements AutoCloseable, ClienteDAO {
+public class ClienteDAOImpl extends Conexion implements ClienteDAO {
 	
 	//Creacion de la tabla Cliente
 	public ClienteDAOImpl() {
@@ -117,11 +117,6 @@ public class ClienteDAOImpl extends Conexion implements AutoCloseable, ClienteDA
 		return null;
 	}
 	
-	//Override de metodo close por implementacion del AutoCloseable
-	@Override
-	public void close() throws Exception {
-		this.cerrarConexion();
 
-	}
 
 }

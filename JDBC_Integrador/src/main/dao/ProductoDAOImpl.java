@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ProductoDAOImpl extends Conexion implements AutoCloseable, ProductoDAO  {
+public class ProductoDAOImpl extends Conexion implements ProductoDAO  {
 
 	//Creacion de la tabla Producto
 	public ProductoDAOImpl() {
@@ -108,12 +108,5 @@ public class ProductoDAOImpl extends Conexion implements AutoCloseable, Producto
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	//Override de metodo close por implementacion del AutoCloseable
-	@Override
-	public void close() throws Exception {
-		this.cerrarConexion();		
-	}
-
 
 }
