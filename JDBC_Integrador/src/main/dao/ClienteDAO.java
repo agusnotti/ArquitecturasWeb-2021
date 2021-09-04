@@ -1,10 +1,10 @@
 package main.dao;
 
-import java.util.List;
-
+import main.dao.entities.Cliente;
 import org.apache.commons.csv.CSVParser;
 
-import main.dao.entities.Cliente;
+import java.util.ArrayList;
+import java.util.List;
 
 public interface ClienteDAO extends AutoCloseable{
 	public void agregar(Cliente c) throws Exception;
@@ -12,4 +12,5 @@ public interface ClienteDAO extends AutoCloseable{
 	public void modificar(Cliente c) throws Exception;
 	public List<Cliente> listar() throws Exception;
 	public void insertarDesdeCSV(CSVParser parser);
+	public ArrayList<Cliente> getClienteMasRecaudador();
 }

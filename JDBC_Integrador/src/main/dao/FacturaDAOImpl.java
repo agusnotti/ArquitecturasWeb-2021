@@ -1,17 +1,13 @@
 package main.dao;
 
-import java.io.FileReader;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.List;
-
-import org.apache.commons.csv.CSVFormat;
+import main.dao.entities.Factura;
+import main.mysql.Conexion;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import main.dao.entities.Factura;
-import main.dao.entities.Producto;
-import main.mysql.Conexion;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
 
 public class FacturaDAOImpl extends Conexion implements AutoCloseable, FacturaDAO {
 

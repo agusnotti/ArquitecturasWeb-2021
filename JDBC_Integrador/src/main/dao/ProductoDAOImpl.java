@@ -1,14 +1,14 @@
 package main.dao;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.List;
-
+import main.dao.entities.Producto;
+import main.mysql.Conexion;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import main.dao.entities.Producto;
-import main.mysql.Conexion;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 public class ProductoDAOImpl extends Conexion implements AutoCloseable, ProductoDAO  {
 
@@ -16,7 +16,7 @@ public class ProductoDAOImpl extends Conexion implements AutoCloseable, Producto
 	public ProductoDAOImpl() {
 		try {
 			this.abrirConexion();
-			String table = "CREATE TABLE IF NOT EXISTS producto (id INT, nombre VARCHAR(500), valor DECIMAL, PRIMARY KEY(id))";
+			String table = "CREATE TABLE IF NOT EXISTS producto (id INT, nombre VARCHAR(500), valor DECIMAL, PRIMARY KEY(id)) " ;
 			PreparedStatement ps = this.conn.prepareStatement(table);
 			ps.execute();
 			ps.close();
@@ -87,4 +87,33 @@ public class ProductoDAOImpl extends Conexion implements AutoCloseable, Producto
 		this.cerrarConexion();		
 	}
 
+
+	public String getProductoMasRecaudador() throws Exception {
+		try {
+			this.abrirConexion();
+			String select = "SELECT p.nombre as nombre, SUM(p.valor * fp.cantidad) as monto FROM producto p INNER JOIN factura_producto fp on p.id = fp.idProducto GROUP BY p.id ORDER BY monto DESC limit 1";
+			PreparedStatement ps = this.conn.prepareStatement(select);
+			ResultSet rs = ps.executeQuery(select);
+
+			String valorReturn = "";
+			if(rs.next())
+			{
+				String nombre = rs.getString("nombre");
+				float monto = rs.getFloat("monto");
+				valorReturn= "['"+ nombre + "'," +monto +"]";
+
+			}
+
+			ps.close();
+			this.cerrarConexion();
+			return valorReturn;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			System.exit(1);
+			return "";
+		}
+
+	}
 }

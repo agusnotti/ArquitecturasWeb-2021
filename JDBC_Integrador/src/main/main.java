@@ -1,17 +1,12 @@
 package main;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
+import main.dao.*;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 
-import main.dao.ClienteDAO;
-import main.dao.DAOFactory;
-import main.dao.FacturaDAO;
-import main.dao.FacturaProductoDAO;
-import main.dao.ProductoDAO;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class main {
 
@@ -20,12 +15,29 @@ public class main {
 		ClienteDAO cliente = DAOFactory.getInstance().getClienteDao();
 		FacturaDAO factura = DAOFactory.getInstance().getFacturaDao();
 		FacturaProductoDAO fact_prod = DAOFactory.getInstance().getFacturaProductoDao();
-			
-		
-		//producto.insertarDesdeCSV(leerCSV("csv/producto.csv"));
-		//cliente.insertarDesdeCSV(leerCSV("csv/clientes.csv"));
-		//factura.insertarDesdeCSV(leerCSV("csv/facturas.csv"));
-		fact_prod.insertarDesdeCSV(leerCSV("csv/facturas-productos.csv"));
+
+
+//		cliente.insertarDesdeCSV(leerCSV("csv/clientes.csv"));
+//
+//		producto.insertarDesdeCSV(leerCSV("csv/productos.csv"));
+//
+//		factura.insertarDesdeCSV(leerCSV("csv/facturas.csv"));
+//		fact_prod.insertarDesdeCSV(leerCSV("csv/facturas-productos.csv"));
+
+		/* Ejercicio 3*/
+		try {
+			System.out.println(producto.getProductoMasRecaudador());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+		/* Ejercicio 4*/
+		try {
+			System.out.println(cliente.getClienteMasRecaudador());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static CSVParser leerCSV(String ruta) {

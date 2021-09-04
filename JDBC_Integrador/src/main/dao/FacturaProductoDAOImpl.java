@@ -1,22 +1,23 @@
 package main.dao;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.List;
-
+import main.dao.entities.FacturaProducto;
+import main.mysql.Conexion;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import main.dao.entities.FacturaProducto;
-import main.dao.entities.Producto;
-import main.mysql.Conexion;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
 
 public class FacturaProductoDAOImpl extends Conexion implements AutoCloseable, FacturaProductoDAO {
 	
 	public FacturaProductoDAOImpl() {
 		try {
 			this.abrirConexion();
-			String table = "CREATE TABLE IF NOT EXISTS factura_producto (idFactura INT, idProducto INT, cantidad INT, PRIMARY KEY(idFactura, idProducto));";
+			String table = "CREATE TABLE IF NOT EXISTS factura_producto (idFactura INT, idProducto INT, cantidad INT, PRIMARY KEY(idFactura, idProducto)," +
+					"FOREIGN KEY (idFactura) REFERENCES factura(idFactura) ON DELETE CASCADE," +
+					"FOREIGN KEY (idProducto) REFERENCES producto(id) ON DELETE CASCADE" +
+					");";
 			PreparedStatement ps = this.conn.prepareStatement(table);
 			ps.execute();
 			ps.close();

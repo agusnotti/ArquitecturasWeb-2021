@@ -10,7 +10,7 @@ public class Conexion {
 		private final String JDBCDriver = "com.mysql.cj.jdbc.Driver";
 		private final String dbUri = "jdbc:mysql://localhost:3306/db_jdbc_integrador?createDatabaseIfNotExist=true";
 		private final String user = "root";
-		private final String pass = "";
+		private final String pass = "password";
 
 
 		

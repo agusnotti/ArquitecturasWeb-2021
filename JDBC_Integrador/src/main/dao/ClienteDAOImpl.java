@@ -1,15 +1,15 @@
 package main.dao;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.List;
-
+import main.dao.entities.Cliente;
+import main.mysql.Conexion;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import main.dao.entities.Cliente;
-import main.dao.entities.Producto;
-import main.mysql.Conexion;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteDAOImpl extends Conexion implements AutoCloseable, ClienteDAO {
 	
@@ -65,6 +65,38 @@ public class ClienteDAOImpl extends Conexion implements AutoCloseable, ClienteDA
 			e.printStackTrace();
 			System.exit(1);	
 		}
+	}
+
+	public ArrayList<Cliente> getClienteMasRecaudador() {
+		ArrayList<Cliente> clientes = new ArrayList<>();
+		try {
+			this.abrirConexion();
+			String select = "SELECT c.*, monto FROM cliente c INNER JOIN (\n" +
+					"SELECT f.idCliente, sum(p.valor * fp.cantidad) monto FROM factura F \n" +
+					"INNER JOIN factura_producto fp ON f.idFactura = fp.idFactura \n" +
+					"INNER JOIN producto p on p.id = fp.idProducto\n" +
+					"group by f.idCliente ) SC ON c.idCliente = SC.idCliente order by monto desc";
+			PreparedStatement ps = this.conn.prepareStatement(select);
+			ResultSet rs = ps.executeQuery(select);
+
+
+			while (rs.next()) {
+
+
+				clientes.add(new Cliente(rs.getInt(1),rs.getString(2),rs.getString(3)));
+
+
+			}
+			ps.close();
+			this.cerrarConexion();
+
+		}
+		catch (SQLException e) {
+		e.printStackTrace();
+
+		}
+		return clientes;
+
 	}
 
 	@Override
