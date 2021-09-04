@@ -1,5 +1,6 @@
 package main.dao.entities;
 
+//Entidad Producto
 public class Producto {
 	private int id;
 	private String nombre;

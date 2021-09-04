@@ -11,6 +11,7 @@ import java.util.List;
 
 public class FacturaProductoDAOImpl extends Conexion implements AutoCloseable, FacturaProductoDAO {
 	
+	//Creacion de la tabla Factura
 	public FacturaProductoDAOImpl() {
 		try {
 			this.abrirConexion();
@@ -28,7 +29,7 @@ public class FacturaProductoDAOImpl extends Conexion implements AutoCloseable, F
 		}
 	}
 	
-	
+	//Insercion de tuplas en tabla por medio de archivo CSV
 	@Override
 	public void insertarDesdeCSV(CSVParser csv) {
 		for(CSVRecord row: csv) {
@@ -46,6 +47,7 @@ public class FacturaProductoDAOImpl extends Conexion implements AutoCloseable, F
 		
 	}	
 
+	//Insercion de tupla en tabla
 	@Override
 	public void agregar(FacturaProducto fp) throws Exception {
 		try {
@@ -66,6 +68,8 @@ public class FacturaProductoDAOImpl extends Conexion implements AutoCloseable, F
 
 	}
 
+	//	Metodos no implementados en esta instancia del trabajo
+	//  correspondientes al ABM de la entidad
 	@Override
 	public void eliminar(FacturaProducto fp) throws Exception {
 		// TODO Auto-generated method stub
@@ -84,7 +88,8 @@ public class FacturaProductoDAOImpl extends Conexion implements AutoCloseable, F
 		return null;
 	}
 
-
+	
+	//Override de metodo close por implementacion del AutoCloseable
 	@Override
 	public void close() throws Exception {
 		this.cerrarConexion();

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ProductoDAOImpl extends Conexion implements AutoCloseable, ProductoDAO  {
 
-
+	//Creacion de la tabla Producto
 	public ProductoDAOImpl() {
 		try {
 			this.abrirConexion();
@@ -24,11 +24,10 @@ public class ProductoDAOImpl extends Conexion implements AutoCloseable, Producto
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.exit(1);
-		}
-		
+		}	
 	}
 	
-	
+	//Insercion de tuplas en tabla por medio de archivo CSV
 	public void insertarDesdeCSV(CSVParser csv) {
 		for(CSVRecord row: csv) {
 			int id =  Integer.parseInt(row.get("idProducto"));
@@ -44,6 +43,7 @@ public class ProductoDAOImpl extends Conexion implements AutoCloseable, Producto
 		}
 	}
 
+	//Insercion de tupla en tabla
 	@Override
 	public void agregar(Producto p) throws Exception {
 		try {
@@ -63,7 +63,34 @@ public class ProductoDAOImpl extends Conexion implements AutoCloseable, Producto
 		}	
 
 	}	
+	
+	//Obtiene el producto que mas ha recaudado
+	public String getProductoMasRecaudado() throws Exception {
+		try {
+			this.abrirConexion();
+			String select = "SELECT p.nombre as nombre, SUM(p.valor * fp.cantidad) as monto FROM producto p INNER JOIN factura_producto fp on p.id = fp.idProducto GROUP BY p.id ORDER BY monto DESC limit 1";
+			PreparedStatement ps = this.conn.prepareStatement(select);
+			ResultSet rs = ps.executeQuery(select);
+			String valorReturn = "";
+			if(rs.next())
+			{
+				String nombre = rs.getString("nombre");
+				float monto = rs.getFloat("monto");
+				valorReturn= "['"+ nombre + "'," +monto +"]";
+			}
+			ps.close();
+			this.cerrarConexion();
+			return valorReturn;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+			return "";
+		}
+	}
+	
 
+	//	Metodos no implementados en esta instancia del trabajo
+	//  correspondientes al ABM de la entidad
 	@Override
 	public void eliminar(Producto p) throws Exception {
 		// TODO Auto-generated method stub
@@ -82,38 +109,11 @@ public class ProductoDAOImpl extends Conexion implements AutoCloseable, Producto
 		return null;
 	}
 
+	//Override de metodo close por implementacion del AutoCloseable
 	@Override
 	public void close() throws Exception {
 		this.cerrarConexion();		
 	}
 
 
-	public String getProductoMasRecaudador() throws Exception {
-		try {
-			this.abrirConexion();
-			String select = "SELECT p.nombre as nombre, SUM(p.valor * fp.cantidad) as monto FROM producto p INNER JOIN factura_producto fp on p.id = fp.idProducto GROUP BY p.id ORDER BY monto DESC limit 1";
-			PreparedStatement ps = this.conn.prepareStatement(select);
-			ResultSet rs = ps.executeQuery(select);
-
-			String valorReturn = "";
-			if(rs.next())
-			{
-				String nombre = rs.getString("nombre");
-				float monto = rs.getFloat("monto");
-				valorReturn= "['"+ nombre + "'," +monto +"]";
-
-			}
-
-			ps.close();
-			this.cerrarConexion();
-			return valorReturn;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-			System.exit(1);
-			return "";
-		}
-
-	}
 }

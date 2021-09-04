@@ -6,6 +6,8 @@ import org.apache.commons.csv.CSVParser;
 
 import main.dao.entities.Factura;
 
+//DAO maneja la relacion de la entidad Factura con la DDBB
+
 public interface FacturaDAO {
 	public void agregar(Factura f) throws Exception;
 	public void eliminar(Factura f) throws Exception;

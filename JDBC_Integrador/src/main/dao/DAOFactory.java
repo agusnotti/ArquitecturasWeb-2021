@@ -1,5 +1,7 @@
 package main.dao;
 
+//Implementacion Factory Method
+
 public class DAOFactory {
 	protected static final DAOFactory INSTANCE = new DAOFactory();
 		
@@ -7,12 +9,13 @@ public class DAOFactory {
 
 	}
 		
-	//SINGLETON --> unica instancia
+	//SINGLETON --> crea una unica instancia
 	public static DAOFactory getInstance() {
 		return INSTANCE;
 	}
 	
-	//crea los daos
+	//Instanciacion de DAO de las entidades
+	
 	public ProductoDAO getProductoDao() {
 		return new ProductoDAOImpl();
 	}

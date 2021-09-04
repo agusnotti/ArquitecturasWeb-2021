@@ -1,5 +1,7 @@
 package main.dao.entities;
 
+//Entidad cliente
+
 public class Cliente {
 	private int id;
 	private String nombre;

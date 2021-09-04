@@ -10,6 +10,7 @@ import java.io.IOException;
 public class Helpers {
 
 
+	//metodo utilizado para parsear la informacion de los archivos CSV
     public static CSVParser leerCSV(String ruta) {
         CSVParser parser = null;
         try {

@@ -13,6 +13,7 @@ import java.util.List;
 
 public class ClienteDAOImpl extends Conexion implements AutoCloseable, ClienteDAO {
 	
+	//Creacion de la tabla Cliente
 	public ClienteDAOImpl() {
 		try {
 			this.abrirConexion();
@@ -27,6 +28,7 @@ public class ClienteDAOImpl extends Conexion implements AutoCloseable, ClienteDA
 		}
 	}
 	
+	//Insercion de tuplas en tabla por medio de archivo CSV
 	@Override
 	public void insertarDesdeCSV(CSVParser csv) {
 		for(CSVRecord row: csv) {
@@ -48,6 +50,7 @@ public class ClienteDAOImpl extends Conexion implements AutoCloseable, ClienteDA
 		}		
 	}
 
+	//Insercion de tupla en tabla
 	@Override
 	public void agregar(Cliente c) throws Exception {
 		try {
@@ -67,6 +70,7 @@ public class ClienteDAOImpl extends Conexion implements AutoCloseable, ClienteDA
 		}
 	}
 
+	//Obtiene un listado de los clientes ordenados en funcion del monto que se les ha facturado
 	public ArrayList<Cliente> getClienteMasRecaudador() {
 		ArrayList<Cliente> clientes = new ArrayList<>();
 		try {
@@ -79,26 +83,22 @@ public class ClienteDAOImpl extends Conexion implements AutoCloseable, ClienteDA
 			PreparedStatement ps = this.conn.prepareStatement(select);
 			ResultSet rs = ps.executeQuery(select);
 
-
 			while (rs.next()) {
-
-
 				clientes.add(new Cliente(rs.getInt(1),rs.getString(2),rs.getString(3)));
-
-
 			}
 			ps.close();
 			this.cerrarConexion();
-
 		}
 		catch (SQLException e) {
 		e.printStackTrace();
-
 		}
 		return clientes;
-
 	}
 
+	
+//	Metodos no implementados en esta instancia del trabajo
+//  correspondientes al ABM de la entidad
+	
 	@Override
 	public void eliminar(Cliente c) throws Exception {
 		// TODO Auto-generated method stub
@@ -117,6 +117,7 @@ public class ClienteDAOImpl extends Conexion implements AutoCloseable, ClienteDA
 		return null;
 	}
 	
+	//Override de metodo close por implementacion del AutoCloseable
 	@Override
 	public void close() throws Exception {
 		this.cerrarConexion();

@@ -1,5 +1,6 @@
 package main.dao.entities;
 
+//Entidad FacturaProducto
 public class FacturaProducto {
 	private int idProducto;
 	private int idFactura;
