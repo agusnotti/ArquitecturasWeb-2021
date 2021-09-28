@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Estudiante {
@@ -31,8 +32,8 @@ public class Estudiante {
 	@Column
 	private int libretaUniversitaria;
 	
-	@ManyToMany
-	private List<Carrera> carreras;
+	@OneToMany (mappedBy = "estudiante")
+	private List<Estudiante_Carrera> estudiantes;
 	
 	public Estudiante() {
 		super();
