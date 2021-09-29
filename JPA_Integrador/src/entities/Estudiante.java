@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+//import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -15,8 +15,7 @@ public class Estudiante {
 
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
-	private int id;
-	
+	private Long id;
 	@Column
 	private String nombre; // nombres -> puede tener mas de 1 
 	@Column
@@ -38,5 +37,70 @@ public class Estudiante {
 	public Estudiante() {
 		super();
 	}
+	public Estudiante(String nombre, String apellido, int edad, char genero, int dni, String ciudadResidencia,
+			int libretaUniversitaria, List<Estudiante_Carrera> estudiantes) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.edad = edad;
+		this.genero = genero;
+		this.dni = dni;
+		this.ciudadResidencia = ciudadResidencia;
+		this.libretaUniversitaria = libretaUniversitaria;
+		this.estudiantes = estudiantes;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+	public int getEdad() {
+		return edad;
+	}
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+	public char getGenero() {
+		return genero;
+	}
+	public void setGenero(char genero) {
+		this.genero = genero;
+	}
+	public int getDni() {
+		return dni;
+	}
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+	public String getCiudadResidencia() {
+		return ciudadResidencia;
+	}
+	public void setCiudadResidencia(String ciudadResidencia) {
+		this.ciudadResidencia = ciudadResidencia;
+	}
+	public int getLibretaUniversitaria() {
+		return libretaUniversitaria;
+	}
+	public void setLibretaUniversitaria(int libretaUniversitaria) {
+		this.libretaUniversitaria = libretaUniversitaria;
+	}
+	public List<Estudiante_Carrera> getEstudiantes() {
+		return estudiantes;
+	}
+	public void setEstudiantes(List<Estudiante_Carrera> estudiantes) {
+		this.estudiantes = estudiantes;
+	}
+	public Long getId() {
+		return id;
+	}
+	
+	
 	
 }

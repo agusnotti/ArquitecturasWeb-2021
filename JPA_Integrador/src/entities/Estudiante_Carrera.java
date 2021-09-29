@@ -1,6 +1,6 @@
 package entities;
 
-import java.sql.Timestamp;
+//import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
