@@ -12,31 +12,31 @@ public class Estudiante_CarreraKey implements Serializable {
 	private static final long serialVersionUID = 5083293818445151026L;
 
 	@Column(name = "estudiante_id")
-    private int estudianteId;
+    private Long estudianteId;
 
     @Column(name = "carrera_id")
-    private int carreraId;
+    private Long carreraId;
 
     
-    public Estudiante_CarreraKey(int estudianteId, int carreraId) {
+    public Estudiante_CarreraKey(Long estudianteId, Long carreraId) {
 		super();
 		this.estudianteId = estudianteId;
 		this.carreraId = carreraId;
 	}
 
-	public int getEstudianteId() {
+	public Long getEstudianteId() {
 		return estudianteId;
 	}
 
-	public void setEstudianteId(int estudianteId) {
+	public void setEstudianteId(Long estudianteId) {
 		this.estudianteId = estudianteId;
 	}
 
-	public int getCarreraId() {
+	public Long getCarreraId() {
 		return carreraId;
 	}
 
-	public void setCarreraId(int carreraId) {
+	public void setCarreraId(Long carreraId) {
 		this.carreraId = carreraId;
 	}
     
