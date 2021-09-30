@@ -1,13 +1,13 @@
 package repository;
 
+import entities.Carrera;
 import entities.Estudiante;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
-
 import java.util.List;
 
 public class EstudianteRepositoryImpl implements EstudianteRepository {
@@ -89,6 +89,22 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 				e.printStackTrace();
 			}
 		}		
+	}
+
+	@Override
+	public List<Estudiante> getEstudiantesDeCarreraYciudad(Carrera c, String ciudad)
+	{
+
+		Query que = em.createQuery(
+				"SELECT e FROM Estudiante e "
+						+"JOIN e.carreras c "
+						+ "WHERE e.ciudadResidencia = :ciudadResidencia "
+						+ "AND carrera_id = :carreraId ORDER BY e.edad", Estudiante.class);
+		que.setParameter("ciudadResidencia", ciudad);
+		que.setParameter("carreraId", c.getId());
+		List<Estudiante> list = que.getResultList();
+		return list;
+
 	}
 
 

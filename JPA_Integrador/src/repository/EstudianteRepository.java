@@ -1,10 +1,10 @@
 package repository;
 
-import java.util.List;
-
+import entities.Carrera;
+import entities.Estudiante;
 import org.apache.commons.csv.CSVParser;
 
-import entities.Estudiante;
+import java.util.List;
 
 public interface EstudianteRepository {
 	Estudiante getEstudianteById(Long id);
@@ -14,4 +14,5 @@ public interface EstudianteRepository {
 	List<Estudiante> getEstudiantesOrdenadosPorEdad();
 	List<Estudiante> getEstudiantesByGenero(char genero);
 	void insertarDesdeCSV(CSVParser csv);
+	List<Estudiante> getEstudiantesDeCarreraYciudad(Carrera c, String ciudad);
 }

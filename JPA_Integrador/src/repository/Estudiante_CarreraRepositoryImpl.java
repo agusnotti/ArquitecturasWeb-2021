@@ -1,16 +1,16 @@
 package repository;
 
 
-import java.sql.Timestamp;
-
-import javax.persistence.EntityManager;
-
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
-
 import entities.Carrera;
 import entities.Estudiante;
 import entities.Estudiante_Carrera;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.sql.Timestamp;
+import java.util.List;
 
 public class Estudiante_CarreraRepositoryImpl implements Estudiante_CarreraRepository {
 
@@ -71,4 +71,16 @@ public class Estudiante_CarreraRepositoryImpl implements Estudiante_CarreraRepos
 		}		
 	}
 
+
+	public List<Estudiante> getGraduadosPorAnio()
+	{
+		Query que = em.createQuery(
+				"SELECT c.nombre, e FROM Estudiante e "
+						+"JOIN e.carreras c "
+						+ "WHERE e.ciudadResidencia = :ciudadResidencia "
+						+ "AND carrera_id = :carreraId ORDER BY e.edad");
+		List<Estudiante> list = que.getResultList();
+		return list;
+
+	}
 }

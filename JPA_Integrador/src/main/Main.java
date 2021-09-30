@@ -1,11 +1,14 @@
 package main;
 
+import DTOs.CarreraDTO;
+import entities.Carrera;
 import entities.Estudiante;
 import repository.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.HashMap;
 import java.util.List;
 
 public class Main {
@@ -43,23 +46,44 @@ public class Main {
 		
 //		f) recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
 
-		List x = carreraRepo.getCarrerasConEstudiantes();
-		for(Object o : x) {
-			Object[] y = (Object[])o;
-			System.out.printf("%s %s\n", y[0], y[1]);
-		}
+//		List x = carreraRepo.getCarrerasConEstudiantes();
+//		for(Object o : x) {
+//			Object[] y = (Object[])o;
+//			System.out.printf("%s %s\n", y[0], y[1]);
+//		}
 
 //		g) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
-		System.out.println();
-		
-		
-		
+		Carrera c = carreraRepo.getCarreraById(1L);
+		System.out.println(estudianteRepo.getEstudiantesDeCarreraYciudad(c,"Tandil"));
+
+//		Generar un reporte de las carreras, que para cada carrera incluya información de los
+//		inscriptos y egresados por año. Se deben ordenar las carreras alfabéticamente, y presentar
+//		los años de manera cronológica.
+
+
+
 				
 		em.getTransaction().commit();
 		
 		em.close();
 		emf.close();
 		
+
+	}
+
+	public void printReport(CarreraDTO cDTO){
+		String toPrint=
+				cDTO.getCarrera().getNombre() + "\n";
+		toPrint += "Graduados" + "\n";
+		HashMap<String, List<Estudiante>> estudiantesGraduados = cDTO.getEstudiantesGraduados();
+		for (String a:estudiantesGraduados.keySet()) {
+			toPrint += "Año: " + a + "\n";
+			for (Estudiante e:estudiantesGraduados.get(a)) {
+				toPrint += "   " + e.getNombre()  + "\n";
+			}
+		}
+
+		System.out.println(toPrint);
 
 	}
 
