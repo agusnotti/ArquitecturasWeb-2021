@@ -47,9 +47,12 @@ public class Carrera {
 	public Long getId() {
 		return id;
 	}
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "Carrera [id=" + id + ", nombre=" + nombre + ", estudiantes=" + estudiantes + "]";
+	}
 	
 	
 

@@ -54,12 +54,15 @@ public class Estudiante_CarreraRepositoryImpl implements Estudiante_CarreraRepos
 			Estudiante estudiante = this.em.find(Estudiante.class, Long.parseLong(row.get("id_estudiante")) );
 			Carrera carrera = this.em.find(Carrera.class, Long.parseLong(row.get("id_carrera")) );
 			Timestamp fechaInscripcion = Timestamp.valueOf(row.get("fechaInscripcion"));
-			boolean graduado = Boolean.parseBoolean(row.get("graduado"));
 			
+			Timestamp fechaGraduacion = null;
+			if(!row.get("fechaGraduacion").equals("null")) {
+				fechaGraduacion = Timestamp.valueOf(row.get("fechaGraduacion"));
+			}
 			
-			System.out.println(row.get("graduado"));
+			System.out.println(row.get("fechaGraduacion"));
 
-			Estudiante_Carrera ec = new Estudiante_Carrera(estudiante, carrera, fechaInscripcion, graduado);
+			Estudiante_Carrera ec = new Estudiante_Carrera(estudiante, carrera, fechaInscripcion, fechaGraduacion);
 			try {
 				this.saveEstudianteCarrera(ec);
 			} catch (Exception e) {

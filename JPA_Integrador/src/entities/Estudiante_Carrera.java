@@ -23,7 +23,7 @@ public class Estudiante_Carrera {
     @Column
 	private Timestamp fechaInscripcion;
 	@Column
-	private boolean graduado;
+	private Timestamp fechaGraduacion;
 	
 	
 	public Estudiante_Carrera() {
@@ -31,12 +31,12 @@ public class Estudiante_Carrera {
 	}
 
 
-	public Estudiante_Carrera(Estudiante estudiante, Carrera carrera, Timestamp fechaInscripcion, boolean graduado) {
+	public Estudiante_Carrera(Estudiante estudiante, Carrera carrera, Timestamp fechaInscripcion, Timestamp fechaGraduacion) {
 		super();
 		this.estudiante = estudiante;
 		this.carrera = carrera;
 		this.fechaInscripcion = fechaInscripcion;
-		this.graduado = graduado;
+		this.fechaGraduacion = fechaGraduacion;
 		this.id = new Estudiante_CarreraKey(estudiante.getId(), carrera.getId());
 	}
 
@@ -75,15 +75,21 @@ public class Estudiante_Carrera {
 	}
 
 
-	public boolean isGraduado() {
-		return graduado;
+	public Timestamp getFechaGraduacion() {
+		return fechaGraduacion;
 	}
 
 
-	public void setGraduado(boolean graduado) {
-		this.graduado = graduado;
+	public void setFechaGraduacion(Timestamp fechaGraduacion) {
+		this.fechaGraduacion = fechaGraduacion;
 	}
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "Estudiante_Carrera [estudiante=" + estudiante + ", carrera=" + carrera + ", fechaInscripcion="
+				+ fechaInscripcion + ", fechaGraduacion=" + fechaGraduacion + "]";
+	}
+
+
 }

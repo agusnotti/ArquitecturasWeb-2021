@@ -97,6 +97,13 @@ public class Estudiante {
 		return id;
 	}
 	
+	@Override
+	public String toString() {
+		return "Estudiante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", genero="
+				+ genero + ", dni=" + dni + ", ciudadResidencia=" + ciudadResidencia + ", libretaUniversitaria="
+				+ libretaUniversitaria + "]";
+	}
+	
 	
 	
 }

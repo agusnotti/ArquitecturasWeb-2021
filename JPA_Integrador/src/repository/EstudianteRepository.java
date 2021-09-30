@@ -8,10 +8,10 @@ import entities.Estudiante;
 
 public interface EstudianteRepository {
 	Estudiante getEstudianteById(Long id);
-	Estudiante getEstudianteByNumeroLibreta(String numLibreta);
+	Estudiante getEstudianteByNumeroLibreta(int numLibreta);
 	Estudiante saveEstudiante(Estudiante c);
 	void deleteEstudiante(Estudiante c);
-	List<Estudiante> getEstudiantesOrdenados();
+	List<Estudiante> getEstudiantesOrdenadosPorEdad();
 	List<Estudiante> getEstudiantesByGenero(char genero);
 	void insertarDesdeCSV(CSVParser csv);
 }
