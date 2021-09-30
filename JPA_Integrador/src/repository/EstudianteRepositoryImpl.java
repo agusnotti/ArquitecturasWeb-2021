@@ -37,7 +37,7 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 	}
 	
 	@Override
-	public List<Estudiante> getEstudiantesByGenero(String genero){
+	public List<Estudiante> getEstudiantesByGenero(char genero){
 		Query que = em.createQuery("SELECT e FROM Estudiante e WHERE e.genero = :genero", Estudiante.class);
 		@SuppressWarnings("unchecked")
 		List<Estudiante> list = (List<Estudiante>)que.getResultList();

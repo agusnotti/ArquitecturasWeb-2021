@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,7 +18,7 @@ public class Estudiante {
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private Long id;
 	@Column
-	private String nombre; // nombres -> puede tener mas de 1 
+	private String nombre;
 	@Column
 	private String apellido;
 	@Column
@@ -38,7 +39,7 @@ public class Estudiante {
 		super();
 	}
 	public Estudiante(String nombre, String apellido, int edad, char genero, int dni, String ciudadResidencia,
-			int libretaUniversitaria, List<Estudiante_Carrera> estudiantes) {
+			int libretaUniversitaria) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -47,7 +48,7 @@ public class Estudiante {
 		this.dni = dni;
 		this.ciudadResidencia = ciudadResidencia;
 		this.libretaUniversitaria = libretaUniversitaria;
-		this.estudiantes = estudiantes;
+		this.estudiantes = new ArrayList<Estudiante_Carrera>();
 	}
 	public String getNombre() {
 		return nombre;
@@ -94,9 +95,7 @@ public class Estudiante {
 	public List<Estudiante_Carrera> getEstudiantes() {
 		return estudiantes;
 	}
-	public void setEstudiantes(List<Estudiante_Carrera> estudiantes) {
-		this.estudiantes = estudiantes;
-	}
+
 	public Long getId() {
 		return id;
 	}

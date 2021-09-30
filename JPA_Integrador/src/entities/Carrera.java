@@ -17,8 +17,6 @@ public class Carrera {
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private Long id;
 	
-	// antiguedad y si esta graduado o no deberia ir en la tabla estudiante_carrera ??
-	
 	@Column
 	private String nombre;
 	
@@ -49,11 +47,6 @@ public class Carrera {
 
 	public List<Estudiante_Carrera> getCarreras() {
 		return carreras;
-	}
-
-
-	public void setCarreras(List<Estudiante_Carrera> carreras) {
-		this.carreras = carreras;
 	}
 
 

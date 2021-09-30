@@ -10,5 +10,5 @@ public interface EstudianteRepository {
 	Estudiante saveEstudiante(Estudiante c);
 	void deleteEstudiante(Estudiante c);
 	List<Estudiante> getEstudiantesOrdenados();
-	List<Estudiante> getEstudiantesByGenero(String genero);
+	List<Estudiante> getEstudiantesByGenero(char genero);
 }
