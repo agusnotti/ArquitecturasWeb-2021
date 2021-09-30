@@ -23,7 +23,7 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 	@Override
 	public Estudiante getEstudianteByNumeroLibreta(String numLibreta) {
 		// es createQuery?
-		TypedQuery<Estudiante> q = em.createQuery("SELECT e FROM Estudiante e WHERE c.libretaUniversitaria = :libretaUniversitaria", Estudiante.class);
+		TypedQuery<Estudiante> q = em.createQuery("SELECT e FROM Estudiante e WHERE e.libretaUniversitaria = :libretaUniversitaria", Estudiante.class);
 		q.setParameter("libretaUniversitaria", numLibreta);
 		return q.getSingleResult();
 	}
