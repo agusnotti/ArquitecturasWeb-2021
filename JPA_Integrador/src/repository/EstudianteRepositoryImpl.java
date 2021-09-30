@@ -28,7 +28,7 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		return q.getSingleResult();
 	}
 	
-
+	@Override
 	public List<Estudiante> getEstudiantesOrdenados(){
 		Query que = em.createQuery("SELECT e FROM Estudiante e ORDER BY e.edad", Estudiante.class);
 		@SuppressWarnings("unchecked")
@@ -36,6 +36,7 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		return list;
 	}
 	
+	@Override
 	public List<Estudiante> getEstudiantesByGenero(String genero){
 		Query que = em.createQuery("SELECT e FROM Estudiante e WHERE e.genero = :genero", Estudiante.class);
 		@SuppressWarnings("unchecked")
