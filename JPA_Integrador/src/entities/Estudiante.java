@@ -1,14 +1,9 @@
 package entities;
 
+import javax.persistence.*;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 //import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Estudiante {
@@ -32,13 +27,13 @@ public class Estudiante {
 	private int libretaUniversitaria;
 	
 	@OneToMany (mappedBy = "estudiante")
-	private List<Estudiante_Carrera> estudiantes;
+	private List<Estudiante_Carrera> carreras;
 	
 	public Estudiante() {
 		super();
 	}
 	public Estudiante(String nombre, String apellido, int edad, char genero, int dni, String ciudadResidencia,
-			int libretaUniversitaria, List<Estudiante_Carrera> estudiantes) {
+			int libretaUniversitaria, List<Estudiante_Carrera> carreras) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -47,7 +42,7 @@ public class Estudiante {
 		this.dni = dni;
 		this.ciudadResidencia = ciudadResidencia;
 		this.libretaUniversitaria = libretaUniversitaria;
-		this.estudiantes = estudiantes;
+		this.carreras = carreras;
 	}
 	public String getNombre() {
 		return nombre;
@@ -91,11 +86,11 @@ public class Estudiante {
 	public void setLibretaUniversitaria(int libretaUniversitaria) {
 		this.libretaUniversitaria = libretaUniversitaria;
 	}
-	public List<Estudiante_Carrera> getEstudiantes() {
-		return estudiantes;
+	public List<Estudiante_Carrera> getCarreras() {
+		return carreras;
 	}
-	public void setEstudiantes(List<Estudiante_Carrera> estudiantes) {
-		this.estudiantes = estudiantes;
+	public void setCarreras(List<Estudiante_Carrera> carreras) {
+		this.carreras = carreras;
 	}
 	public Long getId() {
 		return id;

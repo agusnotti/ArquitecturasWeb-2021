@@ -1,14 +1,9 @@
 package entities;
 
+import javax.persistence.*;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 //import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Carrera {
@@ -23,7 +18,7 @@ public class Carrera {
 	private String nombre;
 	
 	@OneToMany (mappedBy = "carrera")
-	private List<Estudiante_Carrera> carreras;
+	private List<Estudiante_Carrera> estudiantes;
 	
 	
 	public Carrera() {
@@ -47,13 +42,13 @@ public class Carrera {
 	}
 
 
-	public List<Estudiante_Carrera> getCarreras() {
-		return carreras;
+	public List<Estudiante_Carrera> getEstudiantes() {
+		return estudiantes;
 	}
 
 
-	public void setCarreras(List<Estudiante_Carrera> carreras) {
-		this.carreras = carreras;
+	public void setEstudiantes(List<Estudiante_Carrera> estudiantes) {
+		this.estudiantes = estudiantes;
 	}
 
 
