@@ -3,6 +3,9 @@ package repository;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
 import entities.Carrera;
 
 public class CarreraRepositoryImpl implements CarreraRepository {
@@ -43,6 +46,23 @@ public class CarreraRepositoryImpl implements CarreraRepository {
 		} else {
 			em.merge(c);
 		}
+	}
+	
+	@Override
+	public void insertarDesdeCSV(CSVParser csv) {
+		for(CSVRecord row: csv) {
+			String nombre = row.get("nombre");
+			
+//			System.out.println(row.get("id"));
+			System.out.println(row.get("nombre"));
+			
+			Carrera c = new Carrera(nombre);
+			try {
+				this.saveCarrera(c);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}		
 	}
 
 }

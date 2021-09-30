@@ -1,5 +1,7 @@
 package repository;
 
+import org.apache.commons.csv.CSVParser;
+
 import entities.Carrera;
 
 public interface CarreraRepository {
@@ -7,4 +9,5 @@ public interface CarreraRepository {
 	Carrera getCarreraByName(String name);
 	Carrera saveCarrera(Carrera c);
 	void deleteCarrera(Carrera c);
+	void insertarDesdeCSV(CSVParser csv);
 }

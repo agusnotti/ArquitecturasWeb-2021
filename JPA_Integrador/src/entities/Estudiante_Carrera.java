@@ -17,12 +17,12 @@ public class Estudiante_Carrera {
 	
 	@ManyToOne
     @MapsId("studentId")
-    @JoinColumn(name = "estudiante_id")
+    @JoinColumn(name = "estudiante_id", nullable = false)
     private Estudiante estudiante;
 
     @ManyToOne
     @MapsId("courseId")
-    @JoinColumn(name = "carrera_id")
+    @JoinColumn(name = "carrera_id", nullable = false)
     private Carrera carrera;
 
     
@@ -43,6 +43,7 @@ public class Estudiante_Carrera {
 		this.carrera = carrera;
 		this.fechaInscripcion = fechaInscripcion;
 		this.graduado = graduado;
+		this.id = new Estudiante_CarreraKey(estudiante.getId(), carrera.getId());
 	}
 
 

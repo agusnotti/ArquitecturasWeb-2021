@@ -21,6 +21,15 @@ public class Estudiante_CarreraKey implements Serializable {
     public Estudiante_CarreraKey() {
 		super();
 	}
+    
+
+	public Estudiante_CarreraKey(Long estudianteId, Long carreraId) {
+		super();
+		this.estudianteId = estudianteId;
+		this.carreraId = carreraId;
+	}
+
+
 
 	public Long getEstudianteId() {
 		return estudianteId;
