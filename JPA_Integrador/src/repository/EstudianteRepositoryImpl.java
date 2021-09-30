@@ -1,8 +1,10 @@
 package repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import java.util.List;
 import entities.Estudiante;
 
 public class EstudianteRepositoryImpl implements EstudianteRepository {
@@ -24,6 +26,21 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		TypedQuery<Estudiante> q = em.createQuery("SELECT e FROM Estudiante e WHERE c.libretaUniversitaria = :libretaUniversitaria", Estudiante.class);
 		q.setParameter("libretaUniversitaria", numLibreta);
 		return q.getSingleResult();
+	}
+	
+
+	public List<Estudiante> getEstudiantesOrdenados(){
+		Query que = em.createQuery("SELECT e FROM Estudiante e ORDER BY e.edad", Estudiante.class);
+		@SuppressWarnings("unchecked")
+		List<Estudiante> list = (List<Estudiante>)que.getResultList();
+		return list;
+	}
+	
+	public List<Estudiante> getEstudiantesByGenero(String genero){
+		Query que = em.createQuery("SELECT e FROM Estudiante e WHERE e.genero = :genero", Estudiante.class);
+		@SuppressWarnings("unchecked")
+		List<Estudiante> list = (List<Estudiante>)que.getResultList();
+		return list;
 	}
 
 	@Override
