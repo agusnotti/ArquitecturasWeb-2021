@@ -1,10 +1,9 @@
 package entities;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
 public class Estudiante_CarreraKey implements Serializable {
@@ -17,8 +16,7 @@ public class Estudiante_CarreraKey implements Serializable {
     @Column(name = "carrera_id")
     private Long carreraId;
 
-    
-    public Estudiante_CarreraKey() {
+	public Estudiante_CarreraKey() {
 		super();
 	}
     

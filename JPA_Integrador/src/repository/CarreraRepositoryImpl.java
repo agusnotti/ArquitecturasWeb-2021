@@ -1,12 +1,14 @@
 package repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import entities.Carrera;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import java.util.List;
 
-import entities.Carrera;
 
 public class CarreraRepositoryImpl implements CarreraRepository {
 
@@ -53,7 +55,6 @@ public class CarreraRepositoryImpl implements CarreraRepository {
 		for(CSVRecord row: csv) {
 			String nombre = row.get("nombre");
 			
-//			System.out.println(row.get("id"));
 			System.out.println(row.get("nombre"));
 			
 			Carrera c = new Carrera(nombre);
@@ -63,6 +64,16 @@ public class CarreraRepositoryImpl implements CarreraRepository {
 				e.printStackTrace();
 			}
 		}		
+	}
+
+	//recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
+	@Override
+	public List<Carrera> getCarrerasConEstudiantes(){
+		Query q = em.createQuery("SELECT c.nombre, COUNT(*) FROM Carrera c " +
+				"JOIN c.estudiantes e " +
+				"WHERE c.estudiantes IS NOT EMPTY " +
+				"GROUP BY c.nombre ORDER BY COUNT(e.id)");
+		return q.getResultList();
 	}
 
 }
