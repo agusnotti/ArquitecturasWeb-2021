@@ -1,17 +1,12 @@
 package main;
 
-import entities.*;
-import repository.CarreraRepository;
-import repository.CarreraRepositoryImpl;
-import repository.EstudianteRepository;
-import repository.EstudianteRepositoryImpl;
+import entities.Estudiante;
+import repository.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
-import helpers.Helpers;
-import repository.*;
+import java.util.List;
 
 public class Main {
 
@@ -37,18 +32,23 @@ public class Main {
 //		b) matricular un estudiante en una carrera
 		
 		
-//		c) recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple.
-		System.out.println(estudianteRepo.getEstudiantesOrdenadosPorEdad());
+//		c) recuperar todos los estudiantes, y especificar algï¿½n criterio de ordenamiento simple.
+//		System.out.println(estudianteRepo.getEstudiantesOrdenadosPorEdad());
 		
-//		d) recuperar un estudiante, en base a su número de libreta universitaria.
-		System.out.println(estudianteRepo.getEstudianteByNumeroLibreta(44)); 
+//		d) recuperar un estudiante, en base a su nï¿½mero de libreta universitaria.
+//		System.out.println(estudianteRepo.getEstudianteByNumeroLibreta(44));
 		
-//		e) recuperar todos los estudiantes, en base a su género.
-		System.out.println(estudianteRepo.getEstudiantesByGenero('f'));
+//		e) recuperar todos los estudiantes, en base a su gï¿½nero.
+//		System.out.println(estudianteRepo.getEstudiantesByGenero('f'));
 		
 //		f) recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
-		System.out.println(carreraRepo.getCarrerasConEstudiantes());
-		
+
+		List x = carreraRepo.getCarrerasConEstudiantes();
+		for(Object o : x) {
+			Object[] y = (Object[])o;
+			System.out.printf("%s %s\n", y[0], y[1]);
+		}
+
 //		g) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
 		System.out.println();
 		
