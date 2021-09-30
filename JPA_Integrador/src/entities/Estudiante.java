@@ -1,15 +1,13 @@
 package entities;
 
+
 import java.util.ArrayList;
+
+import javax.persistence.*;
+
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 //import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Estudiante {
@@ -49,6 +47,7 @@ public class Estudiante {
 		this.ciudadResidencia = ciudadResidencia;
 		this.libretaUniversitaria = libretaUniversitaria;
 		this.estudiantes = new ArrayList<Estudiante_Carrera>();
+
 	}
 	public String getNombre() {
 		return nombre;
@@ -92,7 +91,7 @@ public class Estudiante {
 	public void setLibretaUniversitaria(int libretaUniversitaria) {
 		this.libretaUniversitaria = libretaUniversitaria;
 	}
-	public List<Estudiante_Carrera> getEstudiantes() {
+	public List<Estudiante_Carrera> getCarreras() {
 		return estudiantes;
 	}
 
