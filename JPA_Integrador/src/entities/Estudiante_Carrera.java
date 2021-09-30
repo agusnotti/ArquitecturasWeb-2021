@@ -30,5 +30,17 @@ public class Estudiante_Carrera {
 	private int antiguedad;
 	@Column
 	private boolean graduado;
-	
+
+    public Estudiante_Carrera() {
+        super();
+    }
+
+    public Estudiante_Carrera(Estudiante_CarreraKey id, Estudiante estudiante, Carrera carrera, int antiguedad, boolean graduado) {
+        super();
+        this.id = id;
+        this.estudiante = estudiante;
+        this.carrera = carrera;
+        this.antiguedad = antiguedad;
+        this.graduado = graduado;
+    }
 }

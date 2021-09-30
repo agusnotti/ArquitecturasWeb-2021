@@ -1,9 +1,11 @@
 package repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-
 import entities.Carrera;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class CarreraRepositoryImpl implements CarreraRepository {
 
@@ -43,6 +45,16 @@ public class CarreraRepositoryImpl implements CarreraRepository {
 		} else {
 			em.merge(c);
 		}
+	}
+
+	//recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
+	@Override
+	public List<Carrera> getCarrerasConEstudiantes(){
+		Query q = em.createQuery("SELECT c.nombre, COUNT(*) FROM Carrera c " +
+				"JOIN c.estudiantes e " +
+				"WHERE c.estudiantes IS NOT EMPTY " +
+				"GROUP BY c.nombre ORDER BY COUNT(e.id)");
+		return q.getResultList();
 	}
 
 }

@@ -1,11 +1,11 @@
 package repository;
 
+import entities.Estudiante;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-
 import java.util.List;
-import entities.Estudiante;
 
 public class EstudianteRepositoryImpl implements EstudianteRepository {
 
@@ -62,5 +62,6 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 			em.merge(c);
 		}
 	}
+
 
 }

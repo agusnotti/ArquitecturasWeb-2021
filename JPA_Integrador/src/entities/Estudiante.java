@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 //import javax.persistence.ManyToMany;
@@ -33,7 +34,7 @@ public class Estudiante {
 		super();
 	}
 	public Estudiante(String nombre, String apellido, int edad, char genero, int dni, String ciudadResidencia,
-			int libretaUniversitaria, List<Estudiante_Carrera> carreras) {
+			int libretaUniversitaria) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -42,7 +43,7 @@ public class Estudiante {
 		this.dni = dni;
 		this.ciudadResidencia = ciudadResidencia;
 		this.libretaUniversitaria = libretaUniversitaria;
-		this.carreras = carreras;
+		this.carreras = new ArrayList<>();
 	}
 	public String getNombre() {
 		return nombre;

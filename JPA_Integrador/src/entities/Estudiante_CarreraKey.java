@@ -1,10 +1,9 @@
 package entities;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
 public class Estudiante_CarreraKey implements Serializable {
@@ -22,6 +21,10 @@ public class Estudiante_CarreraKey implements Serializable {
 		super();
 		this.estudianteId = estudianteId;
 		this.carreraId = carreraId;
+	}
+
+	public Estudiante_CarreraKey() {
+		super();
 	}
 
 	public Long getEstudianteId() {
