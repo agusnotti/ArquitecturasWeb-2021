@@ -16,13 +16,6 @@ public class Estudiante_CarreraKey implements Serializable {
     @Column(name = "carrera_id")
     private Long carreraId;
 
-    
-    public Estudiante_CarreraKey(Long estudianteId, Long carreraId) {
-		super();
-		this.estudianteId = estudianteId;
-		this.carreraId = carreraId;
-	}
-
 	public Estudiante_CarreraKey() {
 		super();
 	}

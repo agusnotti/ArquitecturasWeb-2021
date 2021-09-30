@@ -3,7 +3,6 @@ package entities;
 import javax.persistence.*;
 import java.util.List;
 
-//import javax.persistence.ManyToMany;
 
 @Entity
 public class Carrera {
@@ -11,8 +10,6 @@ public class Carrera {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private Long id;
-	
-	// antiguedad y si esta graduado o no deberia ir en la tabla estudiante_carrera ??
 	
 	@Column
 	private String nombre;
@@ -44,11 +41,6 @@ public class Carrera {
 
 	public List<Estudiante_Carrera> getEstudiantes() {
 		return estudiantes;
-	}
-
-
-	public void setEstudiantes(List<Estudiante_Carrera> estudiantes) {
-		this.estudiantes = estudiantes;
 	}
 
 

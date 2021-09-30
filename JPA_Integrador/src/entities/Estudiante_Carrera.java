@@ -1,13 +1,7 @@
 package entities;
 
-//import java.sql.Timestamp;
-
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 public class Estudiante_Carrera {
@@ -27,20 +21,68 @@ public class Estudiante_Carrera {
 
     
     @Column
-	private int antiguedad;
+	private Timestamp fechaInscripcion;
 	@Column
 	private boolean graduado;
+	
+	
+	public Estudiante_Carrera() {
+		super();
+	}
 
-    public Estudiante_Carrera() {
-        super();
-    }
 
-    public Estudiante_Carrera(Estudiante_CarreraKey id, Estudiante estudiante, Carrera carrera, int antiguedad, boolean graduado) {
-        super();
-        this.id = id;
-        this.estudiante = estudiante;
-        this.carrera = carrera;
-        this.antiguedad = antiguedad;
-        this.graduado = graduado;
-    }
+	public Estudiante_Carrera(Estudiante estudiante, Carrera carrera, Timestamp fechaInscripcion, boolean graduado) {
+		super();
+		this.estudiante = estudiante;
+		this.carrera = carrera;
+		this.fechaInscripcion = fechaInscripcion;
+		this.graduado = graduado;
+	}
+
+
+	public Estudiante_CarreraKey getId() {
+		return id;
+	}
+
+	public Estudiante getEstudiante() {
+		return estudiante;
+	}
+
+
+	public void setEstudiante(Estudiante estudiante) {
+		this.estudiante = estudiante;
+	}
+
+
+	public Carrera getCarrera() {
+		return carrera;
+	}
+
+
+	public void setCarrera(Carrera carrera) {
+		this.carrera = carrera;
+	}
+
+
+	public Timestamp getFechaInscripcion() {
+		return fechaInscripcion;
+	}
+
+
+	public void setFechaInscripcion(Timestamp fechaInscripcion) {
+		this.fechaInscripcion = fechaInscripcion;
+	}
+
+
+	public boolean isGraduado() {
+		return graduado;
+	}
+
+
+	public void setGraduado(boolean graduado) {
+		this.graduado = graduado;
+	}
+	
+	
+	
 }
