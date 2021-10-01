@@ -14,4 +14,6 @@ public interface CarreraRepository {
 	void insertarDesdeCSV(CSVParser csv);
 	List<Carrera> getCarrerasConEstudiantes();
 
+	List<Object> getReporteCarrera();
+
 }
