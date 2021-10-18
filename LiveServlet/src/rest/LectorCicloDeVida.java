@@ -1,5 +1,8 @@
 package rest;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -7,23 +10,23 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class LectorCicloDeVida implements ServletContextListener {
 
-	public static String EMF = null;
+	public static EntityManagerFactory EMF = null;
+	public static EntityManager EM = null;
 	
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		// TODO Auto-generated method stub
 		ServletContextListener.super.contextInitialized(sce);
-		System.out.println("aca iniciaria EMF");
-		EMF = "EMF creado";
-		// aca inicio mi EMF
+		System.out.println("inicio EM");
+		EMF = Persistence.createEntityManagerFactory("Jpa-Estudiantes");
+		EM = EMF.createEntityManager();
 	}
 	
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
-		// TODO Auto-generated method stub
 		ServletContextListener.super.contextDestroyed(sce);
-		System.out.println("aca cerraria EMF");
-		// aca cierro mi EMF
+		System.out.println("cierro EM");
+		EM.close();
+		EMF.close();
 	}
 	
 }
