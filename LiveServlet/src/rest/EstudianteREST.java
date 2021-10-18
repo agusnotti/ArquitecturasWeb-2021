@@ -17,43 +17,90 @@ import repository.EstudianteRepositoryImpl;
 public class EstudianteREST {
 
 	public static EntityManager em = LectorCicloDeVida.EM;
+
+
+	//a) dar de alta un estudiante
+		@POST
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.APPLICATION_JSON)
+		public Response AddUsuario(Estudiante e) {
+			em.getTransaction().begin();
+
+			EstudianteRepository estudianteRepo = new EstudianteRepositoryImpl(em);
+			Estudiante estudiante = estudianteRepo.saveEstudiante(e);
+
+			em.getTransaction().commit();
+			System.out.println(estudiante);
+
+
+			return Response.status(201).entity(e).build();
+		}
 	
-	@GET
-	@Path("/libreta/{numLibreta}")
+	
+	
+	//c) recuperar todos los estudiantes, y especificar algun criterio de ordenamiento simple.
+	@GET 
+	@Path("/edades")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Estudiante getUsuarios(@PathParam("numLibreta")int numLibreta){
-		
+	public List<Estudiante> getEstudiantesPorEdad(){
 		em.getTransaction().begin();
-		
+
 		EstudianteRepository estudianteRepo = new EstudianteRepositoryImpl(em);
-		Estudiante estudiante = estudianteRepo.getEstudianteByNumeroLibreta(numLibreta);
-		
+		List <Estudiante> estudiantes = estudianteRepo.getEstudiantesOrdenadosPorEdad();
+
 		em.getTransaction().commit();
-		System.out.println(estudiante);
-		
-		return estudiante;
+		System.out.println(estudiantes);
+
+		return estudiantes;
 	}
 	
+	
+	//d) recuperar un estudiante, en base a su número de libreta universitaria.
+		@GET
+		@Path("/libreta/{numLibreta}")
+		@Produces(MediaType.APPLICATION_JSON)
+		public Estudiante getUsuarios(@PathParam("numLibreta")int numLibreta){
+
+			em.getTransaction().begin();
+
+			EstudianteRepository estudianteRepo = new EstudianteRepositoryImpl(em);
+			Estudiante estudiante = estudianteRepo.getEstudianteByNumeroLibreta(numLibreta);
+
+			em.getTransaction().commit();
+			System.out.println(estudiante);
+
+			return estudiante;
+		}	
+		
+
+	//e) recuperar todos los estudiantes, en base a su género.
+	@GET
+	@Path("/genero/{g}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Estudiante> getEstu(@PathParam("g")char genero){
+
+		em.getTransaction().begin();
+
+		EstudianteRepository estudianteRepo = new EstudianteRepositoryImpl(em);
+		List <Estudiante> estudiantes = estudianteRepo.getEstudiantesByGenero(genero);
+
+		em.getTransaction().commit();
+		System.out.println(estudiantes);
+
+		return estudiantes;
+	}	
+
+
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Usuario getUsuario(@PathParam("id")int id) {
 		return new Usuario(id, "Nombre_"+id, "Apellido_"+id);
 	}
+
+
+
 	
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response AddUsuario(Estudiante e) {
-		em.getTransaction().begin();
-		
-		EstudianteRepository estudianteRepo = new EstudianteRepositoryImpl(em);
-		Estudiante estudiante = estudianteRepo.saveEstudiante(e);
-		
-		em.getTransaction().commit();
-		System.out.println(estudiante);
-		
-		
-		return Response.status(201).entity(e).build();
-	}
+
+
 }

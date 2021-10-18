@@ -44,7 +44,7 @@ public class Main {
 //		c) recuperar todos los estudiantes, y especificar alg�n criterio de ordenamiento simple.
 //		System.out.println(estudianteRepo.getEstudiantesOrdenadosPorEdad());
 		
-////		d) recuperar un estudiante, en base a su n�mero de libreta universitaria.
+////	d) recuperar un estudiante, en base a su n�mero de libreta universitaria.
 //		System.out.println(estudianteRepo.getEstudianteByNumeroLibreta(44));
 		
 //		e) recuperar todos los estudiantes, en base a su g�nero.
