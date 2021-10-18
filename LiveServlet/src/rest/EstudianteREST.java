@@ -10,6 +10,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import entities.Estudiante;
+import repository.CarreraRepository;
+import repository.CarreraRepositoryImpl;
 import repository.EstudianteRepository;
 import repository.EstudianteRepositoryImpl;
 
@@ -27,8 +29,7 @@ public class EstudianteREST {
 		
 		EstudianteRepository estudianteRepo = new EstudianteRepositoryImpl(em);
 		Estudiante estudiante = estudianteRepo.getEstudianteByNumeroLibreta(numLibreta);
-		
-		em.getTransaction().commit();
+
 		System.out.println(estudiante);
 		
 		return estudiante;
@@ -45,7 +46,7 @@ public class EstudianteREST {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response AddUsuario(Estudiante e) {
-		em.getTransaction().begin();
+
 		
 		EstudianteRepository estudianteRepo = new EstudianteRepositoryImpl(em);
 		Estudiante estudiante = estudianteRepo.saveEstudiante(e);
@@ -56,4 +57,21 @@ public class EstudianteREST {
 		
 		return Response.status(201).entity(e).build();
 	}
+	
+	
+	@GET
+	@Path("/{id}/{ciudad}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object getEstudiantesDeCarreraYciudad(@PathParam("id")Long id,@PathParam("ciudad") String ciudad) {
+
+		
+		EstudianteRepository estudianteRepo = new EstudianteRepositoryImpl(em);
+		CarreraRepository carreraRepo = new CarreraRepositoryImpl(em);
+		entities.Carrera c = carreraRepo.getCarreraById(id);
+
+		
+		return estudianteRepo.getEstudiantesDeCarreraYciudad(c,"Tandil");
+	}
+	
+	
 }
