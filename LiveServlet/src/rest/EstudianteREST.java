@@ -23,10 +23,20 @@ public class EstudianteREST {
 
 	//a) dar de alta un estudiante
 		@POST
-		@Consumes(MediaType.APPLICATION_JSON)
+		@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 		@Produces(MediaType.APPLICATION_JSON)
-		public Response AddEstudiante(Estudiante e) {
-
+		public Response AddEstudiante(@FormParam("nombre") String nombre, 
+									@FormParam("apellido") String apellido, 
+									@FormParam("edad") int edad,
+									@FormParam("genero") char genero,
+									@FormParam("dni") int dni,
+									@FormParam("ciudadResidencia") String ciudadResidencia,
+									@FormParam("libretaUniversitaria") int libretaUniversitaria) {
+			
+			Estudiante e = new Estudiante(nombre, apellido, edad, genero, dni, ciudadResidencia, libretaUniversitaria);
+			
+			em.getTransaction().begin();
+			
 			EstudianteRepository estudianteRepo = new EstudianteRepositoryImpl(em);
 			Estudiante estudiante = estudianteRepo.saveEstudiante(e);
 
