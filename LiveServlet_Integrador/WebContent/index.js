@@ -10,7 +10,8 @@ saveStudent.addEventListener('click', () => {
 	studentModal.style = 'display:hidden;'
 });
 
-// let searchEstudent = document.querySelector('#search-student');
-// searchEstudent.addEventListener('click', () => {
-// 	searchModal.style = 'display:block;'
-// })
+let searchEstudent = document.querySelector('#search-student');
+searchEstudent.addEventListener('click', () => {
+	console.log('HOLA');
+	searchModal.style = 'display:block;'
+})
