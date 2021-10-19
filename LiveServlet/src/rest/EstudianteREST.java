@@ -10,10 +10,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import entities.Estudiante;
+import entities.Estudiante_Carrera;
 import repository.CarreraRepository;
 import repository.CarreraRepositoryImpl;
 import repository.EstudianteRepository;
 import repository.EstudianteRepositoryImpl;
+import repository.Estudiante_CarreraRepository;
+import repository.Estudiante_CarreraRepositoryImpl;
 
 @Path("/estudiantes")
 public class EstudianteREST {
@@ -46,7 +49,22 @@ public class EstudianteREST {
 
 			return Response.status(201).entity(e).build();
 		}
-	
+	//b matricular un estudiante en una carrera
+	@POST
+	@Path("/matricular")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response matricularEstudiante(Estudiante_Carrera ec) {
+
+			em.getTransaction().begin();
+
+			Estudiante_CarreraRepository estudianteCarreraRepo = new Estudiante_CarreraRepositoryImpl(em);
+			estudianteCarreraRepo.saveEstudianteCarrera(ec);
+
+			em.getTransaction().commit();
+
+			return Response.status(201).entity(ec).build();
+	}
 	
 	
 	//c) recuperar todos los estudiantes, y especificar algun criterio de ordenamiento simple.
@@ -54,7 +72,8 @@ public class EstudianteREST {
 	@Path("/edades")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Estudiante> getEstudiantesPorEdad(){
-
+		em.getTransaction().begin();
+		
 		EstudianteRepository estudianteRepo = new EstudianteRepositoryImpl(em);
 
 		List <Estudiante> estudiantes = estudianteRepo.getEstudiantesOrdenadosPorEdad();

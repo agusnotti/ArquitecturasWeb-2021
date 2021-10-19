@@ -26,21 +26,36 @@
 					<li class="nav-item"><a class="nav-link active"
 						data-bs-toggle="modal" data-bs-target="#my-modal"
 						aria-current="page" href="#" id="new-student">Dar de Alta</a></li>
-					<li class="nav-item restart"><a class="nav-link" href="#"
+					<li class="nav-item restart"><a class="nav-link  active" href="#"
 						id="restart">Matricular</a></li>
-					<li class="nav-item"><span class="nav-link active"
-						data-bs-toggle="modal" aria-current="page" href="#">Estudiantes
-							por .. <span id="current-player"></span>
+					<li class="nav-item"><a class="nav-link active"
+						data-bs-toggle="modal" aria-current="page" href="http://localhost:8080/LiveServlet_Integrador/rest/estudiantes/edades">Estudiantes
+							por Edad <span id="current-player"></a>
+					</span></li>
+					<li class="nav-item"><a class="nav-link active"
+						data-bs-toggle="modal" aria-current="page" href="http://localhost:8080/LiveServlet_Integrador/rest/estudiantes/edades">Estudiante
+							por Libreta Universitaria <span id="current-player"></a>
 					</span></li>
 					<li class="nav-item"><span class="nav-link active"
 						data-bs-toggle="modal" aria-current="page" href="#">
 							Buscar <span id="current-player"></span>
 					</span></li>
-
+						
 				</ul>
 			</div>
 		</div>
 	</nav>
+
+	<div style="width:300px">
+		<div class="input-group rounded">
+		  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+		  aria-describedby="search-addon" />
+		  <span class="input-group-text border-0" id="search-addon">
+		    <i class="fas fa-search"></i>
+		  </span>
+		</div>
+	</div>
+		
 
 	<div class="modal" tabindex="-1" id="my-modal">
 		<div class="modal-dialog">
@@ -90,7 +105,6 @@
 		</div>
 	</div>
 
-	<div></div>
-
+	
 </body>
 </html>
