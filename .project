@@ -3,6 +3,7 @@
 	<name>ArquitecturasWeb-2021</name>
 	<comment></comment>
 	<projects>
+		<project>Servers</project>
 	</projects>
 	<buildSpec>
 	</buildSpec>
