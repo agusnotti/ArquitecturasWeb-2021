@@ -10,6 +10,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import entities.Estudiante;
+import repository.CarreraRepository;
+import repository.CarreraRepositoryImpl;
 import repository.EstudianteRepository;
 import repository.EstudianteRepositoryImpl;
 
@@ -23,8 +25,7 @@ public class EstudianteREST {
 		@POST
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
-		public Response AddUsuario(Estudiante e) {
-			em.getTransaction().begin();
+		public Response AddEstudiante(Estudiante e) {
 
 			EstudianteRepository estudianteRepo = new EstudianteRepositoryImpl(em);
 			Estudiante estudiante = estudianteRepo.saveEstudiante(e);
@@ -43,9 +44,9 @@ public class EstudianteREST {
 	@Path("/edades")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Estudiante> getEstudiantesPorEdad(){
-		em.getTransaction().begin();
 
 		EstudianteRepository estudianteRepo = new EstudianteRepositoryImpl(em);
+
 		List <Estudiante> estudiantes = estudianteRepo.getEstudiantesOrdenadosPorEdad();
 
 		em.getTransaction().commit();
@@ -77,14 +78,10 @@ public class EstudianteREST {
 	@GET
 	@Path("/genero/{g}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Estudiante> getEstu(@PathParam("g")char genero){
-
-		em.getTransaction().begin();
+	public List<Estudiante> getEstudiantesPorGenero(@PathParam("g")char genero){
 
 		EstudianteRepository estudianteRepo = new EstudianteRepositoryImpl(em);
 		List <Estudiante> estudiantes = estudianteRepo.getEstudiantesByGenero(genero);
-
-		em.getTransaction().commit();
 		System.out.println(estudiantes);
 
 		return estudiantes;
@@ -102,5 +99,20 @@ public class EstudianteREST {
 
 	
 
+	
+	@GET
+	@Path("/{id}/{ciudad}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object getEstudiantesDeCarreraYciudad(@PathParam("id")Long id,@PathParam("ciudad") String ciudad) {
 
+		
+		EstudianteRepository estudianteRepo = new EstudianteRepositoryImpl(em);
+		CarreraRepository carreraRepo = new CarreraRepositoryImpl(em);
+		entities.Carrera c = carreraRepo.getCarreraById(id);
+
+		
+		return estudianteRepo.getEstudiantesDeCarreraYciudad(c,"Tandil");
+	}
+	
+	
 }
