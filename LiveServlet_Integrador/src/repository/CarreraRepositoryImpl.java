@@ -85,10 +85,10 @@ public class CarreraRepositoryImpl implements CarreraRepository {
 
 		Query q = em.createNativeQuery("select nombre, anio, sum(inscriptos) inscriptos, sum(graduados) graduados from(" +
 				"SELECT nombre, year(fechaInscripcion) anio, count(estudiante_id) as inscriptos, '0' as graduados " +
-				"from carrera c inner join  Estudiante_Carrera ec on carrera_id= c.id group by carrera_id,anio " +
+				"from Carrera c inner join  Estudiante_Carrera ec on carrera_id= c.id group by carrera_id,anio " +
 				"union " +
 				"SELECT nombre, year(fechaGraduacion) anio,  '0' as inscriptos, count(estudiante_id) as graduados " +
-				"from carrera c inner join  Estudiante_Carrera ec on carrera_id= c.id where fechaGraduacion is not null group by carrera_id,anio order by nombre,anio) a " +
+				"from Carrera c inner join  Estudiante_Carrera ec on carrera_id= c.id where fechaGraduacion is not null group by carrera_id,anio order by nombre,anio) a " +
 				" group by nombre, anio;");
 		return q.getResultList();
 

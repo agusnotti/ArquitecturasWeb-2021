@@ -41,7 +41,7 @@ public class CarreraREST {
 	@Path("/reporte")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object getReporteCarrera() {
-		em.getTransaction().begin();
+	
 		CarreraRepository cr = new CarreraRepositoryImpl(em);
 		return cr.getReporteCarrera();
 	}

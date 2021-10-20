@@ -1,5 +1,6 @@
 package rest;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -52,13 +53,18 @@ public class EstudianteREST {
 	//b matricular un estudiante en una carrera
 	@POST
 	@Path("/matricular")
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response matricularEstudiante(Estudiante_Carrera ec) {
+	public Response matricularEstudiante(@FormParam("id-carrera") Long idCarrera,
+										@FormParam("id-estudiante") Long idEstudiante ) {
 
 			em.getTransaction().begin();
+			
 
 			Estudiante_CarreraRepository estudianteCarreraRepo = new Estudiante_CarreraRepositoryImpl(em);
+			EstudianteRepository er = new EstudianteRepositoryImpl(em);
+			CarreraRepository cr = new CarreraRepositoryImpl(em);
+			Estudiante_Carrera ec = new Estudiante_Carrera(er.getEstudianteById(idEstudiante), cr.getCarreraById(idCarrera), null, new Timestamp(System.currentTimeMillis()));
 			estudianteCarreraRepo.saveEstudianteCarrera(ec);
 
 			em.getTransaction().commit();
